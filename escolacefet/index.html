@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Media</title>
+    <script type="module" src="alunoGestor.js" defer></script>
+</head>
+<body>
+    <head>
+        <hr>
+        <a href="../../">Home</a>
+        <hr>
+        <h2>Cálculo da média</h2>
+        <hr>
+    </head>
+    <main>
+        <span id="erro" style="color: red;"></span>
+        <form id="formMedia" action="processaDados.php" method="POST">
+            <label for="nome">Aluno: </label>
+            <input id="nome" name="nome" type="text" required/>
+            <label for="nota1">Nota 1: </label>
+            <input type="number" min="0" max="10" step="1" id="nota1" name="nota1" />
+            <label for="nota2">Nota 2: </label>
+			<!-- Estou aceitando até 11 de forma proposital -->
+            <input type="number" min="0" max="11" step="1" id="nota2" name="nota2" />
+
+            <input id="btnEnviar" type="submit" value="calcular">
+        </form>
+        <h3 id="dados" class="info"></h3>
+        <hr>
+        <span id="alunoNome" class="info"></span> <br/>
+        <span id="alunoMedia" class="info"></span> <br/>
+        <span id="alunoGrau" class="info"></span> 
+        <table border=1 id="tblAluno">
+            <thead>
+                <tr>
+                    <th>ID</th><TH>NOME</TH><th>NOTA 1</th><th>nota 2</th><th>MÉDIA</th><th>GRAU</th><th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </main>
+    <footer></footer>
+</body>
+</html>
