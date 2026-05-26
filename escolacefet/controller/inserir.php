@@ -1,4 +1,4 @@
-<?php
+cont<?php
 declare(strict_types=1);
 require_once '../model/funcoesAluno.php';
 require_once '../../util/funcoesUtil.php';
