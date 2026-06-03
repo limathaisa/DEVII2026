@@ -25,3 +25,19 @@ export async function remove(id){
         throw new Error('Dados esperados ausentes.  ');
      return dados;
 }
+
+export async function obterPeloId( id ) {
+        let resposta =  await fazRequisicaoAA( url+'obterPeloId.php?id=' +id ); 
+        let dados = await verificaErros( resposta );
+        if( ! dados )
+            throw new Error(' Dados esperados ausentes.  ');
+        return dados;
+}
+
+export async function altera( aluno ) {
+        let resposta =  await fazRequisicaoAA( url+'alterar.php', 'PUT', aluno ); 
+        let dados = await verificaErros( resposta );
+        if( ! dados )
+            throw new Error(' Dados esperados ausentes.  ');
+        return dados;
+}

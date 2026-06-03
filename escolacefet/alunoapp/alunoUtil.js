@@ -46,4 +46,15 @@ function preencheTabela( alunos ){
     corpoTbl.appendChild(linha);
     });
 }
-export { valida, preencheDados, spanErro, formAluno, preencheTabela }
+
+function preencheForm( {id, nome, nota1, nota2} ){
+    formAluno.id.value = id;
+    formAluno.nome.value = nome;
+    formAluno.nota1.value = nota1;
+    formAluno.nota2.value = nota2;
+    formAluno.btnEnviar.value  = "calcular e alterar";
+
+}
+
+
+export { valida, preencheDados, spanErro, formAluno, preencheTabela, preencheForm }

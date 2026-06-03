@@ -1,8 +1,12 @@
+
+
 import { limpaElementos, exibeErro, limpaForm } from "../js/util.js";
-import { spanErro, formAluno, preencheDados, valida, preencheTabela} from "./alunoUtil.js";
-import { insere, lista, remove} from "./alunoApi.js";
+import { spanErro, formAluno, preencheDados, valida, preencheTabela, preencheForm} from "./alunoUtil.js";
+import { insere, lista, obterPeloId, remove, altera} from "./alunoApi.js";
 
 document.addEventListener('DOMContentLoaded', async ()=>{
+document.querySelector('#btnEnviar').value = "Calcular e inserir";
+
 //Requisição para listar
 try{
         let alunos = await lista();
@@ -23,14 +27,20 @@ tblAlunos.addEventListener('click', async e => {
                 try{
                     await remove(botao.dataset.id);
                     let alunos = await lista();
-                    preencheTabela( tabela );
+                    preencheTabela( tblAlunos );
                 } catch(erro) {
                     exibeErro(spanErro, erro.message, 3000);
                 } 
             }
         } else if(botao.textContent === '[ALTERAR]'){
             
-            ; 
+                try{
+                     let aluno = await obterPeloId(botao.dataset.id);
+                    preencheForm( aluno );
+               }catch (erro) {
+                  exibeErro(spanErro, erro.message, 3000);
+               }   
+
         }
     }
 });
@@ -50,16 +60,26 @@ formAluno.addEventListener('submit', async e => {
         exibeErro( spanErro, msgErro, 3000);
         return; //Interrompe
     }
-    //Requisição para inserir
+    //Requisição para inserir OU ALTERAR
+    aluno.id = (document.querySelector('#id').value)?document.querySelector('#id').value:0;
     try{
-        let dados = await insere( aluno );
+        
+        let dados = null;
+        if(aluno.id <= 0)
+           dados = await insere(aluno);    
+        else{
+            dados = await altera(aluno);
+            document.querySelector("#btnEnviar").value = "calcula e insere";     
+        }
+      
         preencheDados( dados );
         limpaForm(formAluno);
+        formAluno.id.value = 0;
        setTimeout(()=>{
         limpaElementos('.info');
        }, 3000);
        let alunos = await lista();
-       //preencheTabela( alunos );
+       preencheTabela( alunos );
      } catch (erro) {
         exibeErro(spanErro, erro.message, 3000);
     } 
