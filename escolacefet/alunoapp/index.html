@@ -18,6 +18,7 @@
     <main>
         <span id="erro" style="color: red;"></span>
         <form id="formMedia" action="processaDados.php" method="POST">
+            <input type="hidden" id="id">
             <label for="nome">Aluno: </label>
             <input id="nome" name="nome" type="text" required/>
             <label for="nota1">Nota 1: </label>
@@ -36,7 +37,7 @@
         <table border=1 id="tblAluno">
             <thead>
                 <tr>
-                    <th>ID</th><TH>NOME</TH><th>NOTA 1</th><th>nota 2</th><th>MÉDIA</th><th>GRAU</th><th>AÇÕES</th>
+                    <th>ID</th><TH>NOME</TH><th>MÉDIA</th><th>NOTA 1</th><th>NOTA 2</th><th>GRAU</th><th>AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
