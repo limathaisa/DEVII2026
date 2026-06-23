@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
-require_once "../../util/funcoesUtil.php";
+require_once "../../util/funcoes.php";
+require_once "../model/funcoesBD.php";
  
-$aluno = [];
+$alunos = [];
 $pdo = getPDO();
  
 try{
- $sql = "SELECT id, nome, nota1, nota2, media, grau FROM aluno";
- $stmt = $pdo-> prepare($sql);
- $stmt -> execute();
- $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ /** @var callable $listar */
+ $alunos = $listar();
  
 } catch (PDOException $e) {
 responderJson(["erro" => "erro ao listar alunos"], 400);

@@ -1,20 +1,18 @@
 <?php
 declare(strict_types=1);
-require_once '../model/funcoesAluno.php';
-require_once '../../util/funcoesUtil.php';
+require_once '../model/funcoes.php';
+require_once '../../util/funcoes.php';
+require_once '../model/funcoesBD.php';
  
  //recebe Dados
- $id = (int) $_GET['id'];
+ $id = validarId($_GET['id']);
 // sem validações
 $aluno = null;
 $pdo = getPDO();
+
 try{
-    
-    $sql = "SELECT id, nome, nota1, nota2, media, grau FROM aluno WHERE id = :ID";
-    $stmt = $pdo->prepare($sql);
-    $stmt -> bindParam(":ID",$id,PDO::PARAM_INT);
-    $stmt -> execute();
-    $aluno = $stmt->fetch(PDO::FETCH_ASSOC);
+    /** @var callable $obterPeloId */
+    $aluno = $obterPeloId( $id );
 } catch (PDOException $e) {
    responderJson(["erro" => "Erro ao obter aluno"], 400);
  
